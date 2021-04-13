@@ -6,20 +6,24 @@ import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
 
 import reducer, { initialState } from './reducers/index';
-import { addOne, applyNumber, changeOperation} from './actions/index';
+import { addOne, applyNumber, changeOperation, clearDisplay} from './actions/index';
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   
-  const addHandler = () => {
-    dispatch(addOne())
-  }
+  // const addHandler = () => {
+  //   dispatch(addOne())
+  // }
   const applyNumberHandler = (num) => {
     dispatch(applyNumber(num))
   }
   const operationHandler = (operation) => {
     dispatch(changeOperation(operation))
   }
+  const clearDisplayHandler = () => {
+    dispatch(clearDisplay())
+  }
+
   return (
     <div className="App">
       <nav className="navbar navbar-dark bg-dark">
@@ -67,7 +71,7 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton value={"CE"} onClick={()=>clearDisplayHandler()}/>
             </div>
 
           </form>
