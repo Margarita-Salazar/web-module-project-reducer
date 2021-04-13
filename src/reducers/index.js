@@ -1,12 +1,13 @@
-import { ADD_ONE, APPLY_NUMBER, CHANGE_OPERATION } from './../actions';
+import { ADD_ONE, APPLY_NUMBER, CHANGE_OPERATION, CLEAR_DISPLAY, MEMORY_PLUS, MEMORY_RECALL, MEMORY_CLEAR } from './../actions';
 
 export const initialState = {
-    total: 100,
-    operation: "*",
-    memory: 100
+    total: 0,
+    operation: "+",
+    memory: 0
 }
 
 const calculateResult = (num1, num2, operation) => {
+    // eslint-disable-next-line default-case
     switch(operation) {
         case("+"):
             return num1 + num2;
@@ -36,7 +37,26 @@ const reducer = (state, action) => {
                 ...state,
                 operation: action.payload
             });
-            
+        case(CLEAR_DISPLAY):
+            return({
+                ...state,
+                total: 0
+            })
+        case(MEMORY_PLUS):
+            return ({
+                ...state,
+                memory: state.total,
+        })
+        case(MEMORY_RECALL):
+            return ({
+                ...state,
+                total: state.memory,
+        })
+        case(MEMORY_CLEAR):
+            return ({
+                ...state,
+                memory: 0,
+        })
         default:
             return state;
     }
